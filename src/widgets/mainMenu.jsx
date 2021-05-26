@@ -56,7 +56,7 @@ function MainMenu(props) {
           <MDBNavbarBrand href="#">
             {" "}
             <Link to={`/`}>
-              <Image size="small" src="/images/logo.jpg" />
+              <Image size="small" src="/images/logo2.png" />
             </Link>
           </MDBNavbarBrand>
           <MDBNavbarToggler

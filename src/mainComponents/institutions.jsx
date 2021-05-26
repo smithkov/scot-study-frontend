@@ -34,7 +34,7 @@ function Institutions(props) {
   useEffect(async () => {
     const id = props.match.params.id;
 
-    const result = await clientService.institutions();
+    const result = await clientService.allInstitutions();
 
     setInstitutions(result.data.data);
     setHasData(true);
@@ -65,7 +65,7 @@ function Institutions(props) {
                               <Image
                                 style={imageOpacityStyles(200)}
                                 className="img-fluid hover-shadow"
-                                src={`/banners/${item.banner}`}
+                                src={`${item.banner}`}
                               />
                               <div className="mask">
                                 <div

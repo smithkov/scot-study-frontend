@@ -13,7 +13,7 @@ import {
 } from "@coreui/react";
 
 import CIcon from "@coreui/icons-react";
-
+import { Image } from "semantic-ui-react";
 // sidebar nav config
 import navigation from "./_nav";
 
@@ -27,16 +27,7 @@ const TheSidebar = () => {
       onShowChange={(val) => dispatch({ type: "set", sidebarShow: val })}
     >
       <CSidebarBrand className="d-md-down-none" to="/">
-        <CIcon
-          className="c-sidebar-brand-full"
-          name="logo-negative"
-          height={35}
-        />
-        <CIcon
-          className="c-sidebar-brand-minimized"
-          name="sygnet"
-          height={35}
-        />
+        <Image style={{ height: 48 }} src="/images/logo2.png" />
       </CSidebarBrand>
       <CSidebarNav>
         <CCreateElement

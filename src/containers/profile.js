@@ -18,6 +18,7 @@ import {
   Divider,
   List,
 } from "semantic-ui-react";
+import { CCard, CCardBody, CCardFooter, CCardHeader } from "@coreui/react";
 const Profile = () => {
   const [isRegisterSuccess, setIsRegisterSuccess] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -165,148 +166,156 @@ const Profile = () => {
           <br />
           <Grid columns="equal">
             <Grid.Column width={1}></Grid.Column>
-            <Grid.Column width={8}>
-              {isShowMessage ? (
-                <Message warning>
-                  <Message.Content>
-                    <p style={{ textAlign: "center" }}>{errorMessage}</p>
-                  </Message.Content>
-                </Message>
-              ) : (
-                ""
-              )}
-              <Form>
-                <Form.Field>
-                  <label>Contact email </label>
-                  <input
-                    onChange={onChange}
-                    value={contactEmail}
-                    name="contactEmail"
-                    type="email"
-                    placeholder="Contact Email"
-                    disabled={isDisabled}
-                  />
-                </Form.Field>
-                <Form.Field required>
-                  <label>First name</label>
-                  <input
-                    value={firstname}
-                    placeholder="First name"
-                    disabled={isDisabled}
-                  />
-                </Form.Field>
-                <Form.Field required>
-                  <label>Last name</label>
-                  <input
-                    value={lastname}
-                    placeholder="Last name"
-                    disabled={isDisabled}
-                  />
-                </Form.Field>
-                <Form.Field required>
-                  <label>Phone</label>
-                  <Form.Input
-                    fluid
-                    required
-                    name="phone"
-                    value={phone}
-                    placeholder="Phone"
-                    onChange={onChange}
-                    disabled={isDisabled}
-                  />
-                </Form.Field>
-                <Form.Field required>
-                  <label>Country of residence</label>
-                  <Dropdown
-                    required
-                    fluid
-                    selection
-                    disabled={isDisabled}
-                    name="selectedCountry"
-                    placeholder={countryText || "Country of residence"}
-                    options={country}
-                    onChange={onChangeDropdown}
-                  />
-                </Form.Field>
-                <Form.Field required>
-                  <label>Date of birth</label>
-                  <input
-                    value={dob}
-                    name="dob"
-                    placeholder="Date of birth"
-                    required
-                    onChange={onChange}
-                    disabled={isDisabled}
-                  />
-                </Form.Field>
-                <Form.Field required>
-                  <label>Gender</label>
-                  <Dropdown
-                    selection
-                    onChange={onChangeDropdown}
-                    name="selectedGender"
-                    options={[
-                      { key: 1, text: "Male", value: "Male" },
-                      { key: 2, text: "Female", value: "Female" },
-                    ]}
-                    placeholder={selectedGender || "Choose an option"}
-                    disabled={isDisabled}
-                  />
-                </Form.Field>
-                <Form.Field required>
-                  <label>Marital</label>
-                  <Dropdown
-                    selection
-                    onChange={onChangeDropdown}
-                    name="selectedMarital"
-                    options={[
-                      { key: 1, text: "Single", value: "Single" },
-                      { key: 2, text: "Married", value: "Married" },
-                    ]}
-                    placeholder={selectedMarital || "Choose an option"}
-                    disabled={isDisabled}
-                  />
-                </Form.Field>
-                <Form.Field required>
-                  <label>Home address</label>
-                  <input
-                    name="homeAddress"
-                    value={homeAddress}
-                    placeholder="Home address"
-                    required
-                    onChange={onChange}
-                    disabled={isDisabled}
-                  />
-                </Form.Field>
-                <Form.Field required>
-                  <label>Postal address</label>
-                  <input
-                    name="postalAddress"
-                    value={postalAddress}
-                    placeholder="Contact address"
-                    required
-                    onChange={onChange}
-                    disabled={isDisabled}
-                  />
-                </Form.Field>
-                <hr />
-                <Button
-                  onClick={() => {
-                    setIsDisabled(false);
-                  }}
-                  type="submit"
-                >
-                  Edit
-                </Button>
-                <Button
-                  loading={loading}
-                  onClick={update}
-                  color="blue"
-                  type="submit"
-                >
-                  Update
-                </Button>
-              </Form>
+            <Grid.Column width={14}>
+              <CCard borderColor="primary">
+                <CCardHeader>
+                  <h4>My Profile</h4>
+                </CCardHeader>
+                <CCardBody>
+                  {isShowMessage ? (
+                    <Message warning>
+                      <Message.Content>
+                        <p style={{ textAlign: "center" }}>{errorMessage}</p>
+                      </Message.Content>
+                    </Message>
+                  ) : (
+                    ""
+                  )}
+                  <Form>
+                    <Form.Field>
+                      <label>Contact email </label>
+                      <input
+                        onChange={onChange}
+                        value={contactEmail}
+                        name="contactEmail"
+                        type="email"
+                        placeholder="Contact Email"
+                        disabled={isDisabled}
+                      />
+                    </Form.Field>
+                    <Form.Field required>
+                      <label>First name</label>
+                      <input
+                        value={firstname}
+                        placeholder="First name"
+                        disabled={isDisabled}
+                      />
+                    </Form.Field>
+                    <Form.Field required>
+                      <label>Last name</label>
+                      <input
+                        value={lastname}
+                        placeholder="Last name"
+                        disabled={isDisabled}
+                      />
+                    </Form.Field>
+                    <Form.Field required>
+                      <label>Phone</label>
+                      <Form.Input
+                        fluid
+                        required
+                        name="phone"
+                        value={phone}
+                        placeholder="Phone"
+                        onChange={onChange}
+                        disabled={isDisabled}
+                      />
+                    </Form.Field>
+                    <Form.Field required>
+                      <label>Country of residence</label>
+                      <Dropdown
+                        required
+                        fluid
+                        selection
+                        disabled={isDisabled}
+                        name="selectedCountry"
+                        placeholder={countryText || "Country of residence"}
+                        options={country}
+                        onChange={onChangeDropdown}
+                      />
+                    </Form.Field>
+                    <Form.Field required>
+                      <label>Date of birth</label>
+                      <input
+                        value={dob}
+                        name="dob"
+                        placeholder="Date of birth"
+                        required
+                        onChange={onChange}
+                        disabled={isDisabled}
+                      />
+                    </Form.Field>
+                    <Form.Field required>
+                      <label>Gender</label>
+                      <Dropdown
+                        selection
+                        onChange={onChangeDropdown}
+                        name="selectedGender"
+                        options={[
+                          { key: 1, text: "Male", value: "Male" },
+                          { key: 2, text: "Female", value: "Female" },
+                        ]}
+                        placeholder={selectedGender || "Choose an option"}
+                        disabled={isDisabled}
+                      />
+                    </Form.Field>
+                    <Form.Field required>
+                      <label>Marital</label>
+                      <Dropdown
+                        selection
+                        onChange={onChangeDropdown}
+                        name="selectedMarital"
+                        options={[
+                          { key: 1, text: "Single", value: "Single" },
+                          { key: 2, text: "Married", value: "Married" },
+                        ]}
+                        placeholder={selectedMarital || "Choose an option"}
+                        disabled={isDisabled}
+                      />
+                    </Form.Field>
+                    <Form.Field required>
+                      <label>Home address</label>
+                      <input
+                        name="homeAddress"
+                        value={homeAddress}
+                        placeholder="Home address"
+                        required
+                        onChange={onChange}
+                        disabled={isDisabled}
+                      />
+                    </Form.Field>
+                    <Form.Field required>
+                      <label>Postal address</label>
+                      <input
+                        name="postalAddress"
+                        value={postalAddress}
+                        placeholder="Contact address"
+                        required
+                        onChange={onChange}
+                        disabled={isDisabled}
+                      />
+                    </Form.Field>
+                    <hr />
+                    <Button
+                      onClick={() => {
+                        setIsDisabled(false);
+                      }}
+                      type="submit"
+                    >
+                      Edit
+                    </Button>
+                    <Button
+                      loading={loading}
+                      onClick={update}
+                      color="blue"
+                      type="submit"
+                    >
+                      Update
+                    </Button>
+                  </Form>
+                </CCardBody>
+              </CCard>
+
               <br />
             </Grid.Column>
             <Grid.Column></Grid.Column>

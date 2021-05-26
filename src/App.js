@@ -125,91 +125,94 @@ class App extends Component {
             <Route
               path="/institution_list"
               name="Home"
-              render={(props) => <InstitutionList {...props} />}
+              component={ProtectedRoute(InstitutionList)}
             />
             <Route
               path="/institution_update/:id"
               name="Home"
-              render={(props) => <InstitutionUpdate {...props} />}
+              component={ProtectedRoute(InstitutionUpdate)}
             />
             <Route
               path="/intitution_save"
               name="Home"
-              render={(props) => <InstitutionForm {...props} />}
+              component={ProtectedRoute(InstitutionForm)}
             />
 
             <Route
               path="/course_list"
               name="Home"
-              render={(props) => <CourseList {...props} />}
+              component={ProtectedRoute(CourseList)}
+              // render={(props) => <CourseList {...props} />}
             />
             <Route
               path="/course_update/:id"
               name="Home"
-              render={(props) => <CourseUpdate {...props} />}
+              component={ProtectedRoute(CourseUpdate)}
+              //render={(props) => <CourseUpdate {...props} />}
             />
             <Route
               path="/course_save"
               name="Home"
-              render={(props) => <CourseForm {...props} />}
+              component={ProtectedRoute(CourseForm)}
             />
 
             <Route
               path="/dashboard"
               name="Home"
-              render={(props) => <Dashboard {...props} />}
+              component={ProtectedRoute(Dashboard)}
             />
 
             <Route
               path="/admin_dashboard"
               name="Home"
-              render={(props) => <AdminDashboard {...props} />}
+              component={ProtectedRoute(AdminDashboard)}
             />
 
             <Route
               path="/profile"
               name="Home"
-              render={(props) => <Profile {...props} />}
+              component={ProtectedRoute(Profile)}
             />
 
             <Route
               path="/highSchool"
               name="Home"
-              render={(props) => <HighSchool {...props} />}
+              component={ProtectedRoute(HighSchool)}
             />
             <Route
               path="/application"
               name="Home"
-              render={(props) => <Application {...props} />}
+              component={ProtectedRoute(Application)}
             />
             <Route
               path="/edu_background"
               name="Home"
-              render={(props) => <Qualification {...props} />}
+              component={ProtectedRoute(Qualification)}
             />
 
             <Route
               path="/visa_history"
               name="Home"
-              render={(props) => <VisaHistory {...props} />}
+              component={ProtectedRoute(VisaHistory)}
             />
 
             <Route
               path="/english_test"
               name="Home"
-              render={(props) => <English {...props} />}
+              component={ProtectedRoute(English)}
             />
 
             <Route
               path="/sponsorship"
               name="Home"
-              render={(props) => <Sponsor {...props} />}
+              component={ProtectedRoute(Sponsor)}
             />
 
             <Route exact path="/" component={Index} />
             <Route exact path="/courses/:facultyId" component={CourseListing} />
-            <Route exact path="/course/:id" component={Institution} />
             <Route exact path="/course/:id" component={CourseDetail} />
+            <Route exact path="/course/:id" component={CourseDetail} />
+            <Route exact path="/institution/:id" component={Institution} />
             <Route exact path="/login" component={Login} />
             <Route exact path="/register" component={Register} />
             <Route exact path="/institutions" component={Institutions} />

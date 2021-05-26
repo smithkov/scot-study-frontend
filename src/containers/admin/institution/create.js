@@ -212,7 +212,7 @@ const InstitutionForm = (props) => {
                     />
                   </Form.Group>
                   <Form.Field>
-                    <label>Banner (728×90)</label>
+                    <label>Banner </label>
                     <input type="file" onChange={bannerChangedHandler} />
                   </Form.Field>
                   <br />

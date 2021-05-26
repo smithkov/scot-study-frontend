@@ -5,6 +5,7 @@ import HighestQualification from "./highestQualification";
 import PreviousQualification from "./previousQualification";
 import { asyncLocalStorage, TOKEN, USER } from "../utility/global";
 import { years } from "../utility/constants";
+import { CCard, CCardBody, CCardFooter, CCardHeader } from "@coreui/react";
 import {
   Menu,
   Dropdown,
@@ -255,49 +256,54 @@ const Qualification = (props) => {
           <br />
           <Grid columns="equal">
             <Grid.Column width={1}></Grid.Column>
-            <Grid.Column width={8}>
-              {isShowMessage ? (
-                <Message warning>
-                  <Message.Content style={{ textAlign: "center" }}>
-                    {errorMessage}
-                  </Message.Content>
-                </Message>
-              ) : (
-                ""
-              )}
-              <HighestQualification
-                onChangeDropdown={onChangeDropdown}
-                onChange={onChange}
-                loading={loading}
-                save={save}
-                schoolName={hq_schoolName}
-                grade={hq_grade}
-                hasCompleted={hasCompletedText}
-                programmeYear={programeYearText}
-                qualification={qualificationText}
-              />
-              <br />
-              <Button onClick={showPreviousQualification} color="green">
-                <Icon name="plus" /> Add previous qualification
-              </Button>
-              <br />
-              <br />
-              {/* previous qualification form below */}
-              {showPrevious ? (
-                <PreviousQualification
-                  onChangeDropdown={onChangeDropdown}
-                  onChange={onChange}
-                  loading={loading}
-                  save={savePrevious}
-                  schoolName={pq_schoolName}
-                  grade={pq_grade}
-                  hasCompleted={previousHasCompletedText}
-                  programmeYear={previousProgrameYearText}
-                  qualification={previousQualificationText}
-                />
-              ) : (
-                ""
-              )}
+            <Grid.Column width={14}>
+              <CCard borderColor="primary">
+                <CCardBody>
+                  {isShowMessage ? (
+                    <Message warning>
+                      <Message.Content style={{ textAlign: "center" }}>
+                        {errorMessage}
+                      </Message.Content>
+                    </Message>
+                  ) : (
+                    ""
+                  )}
+
+                  <HighestQualification
+                    onChangeDropdown={onChangeDropdown}
+                    onChange={onChange}
+                    loading={loading}
+                    save={save}
+                    schoolName={hq_schoolName}
+                    grade={hq_grade}
+                    hasCompleted={hasCompletedText}
+                    programmeYear={programeYearText}
+                    qualification={qualificationText}
+                  />
+                  <br />
+                  <Button onClick={showPreviousQualification} color="green">
+                    <Icon name="plus" /> Add previous qualification
+                  </Button>
+                  <br />
+                  <br />
+                  {/* previous qualification form below */}
+                  {showPrevious ? (
+                    <PreviousQualification
+                      onChangeDropdown={onChangeDropdown}
+                      onChange={onChange}
+                      loading={loading}
+                      save={savePrevious}
+                      schoolName={pq_schoolName}
+                      grade={pq_grade}
+                      hasCompleted={previousHasCompletedText}
+                      programmeYear={previousProgrameYearText}
+                      qualification={previousQualificationText}
+                    />
+                  ) : (
+                    ""
+                  )}
+                </CCardBody>
+              </CCard>
             </Grid.Column>
             <Grid.Column></Grid.Column>
           </Grid>

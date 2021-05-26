@@ -130,7 +130,7 @@ function CourseDetail(props) {
                 <Menu.Item
                   name="upcomingEvents"
                   content={
-                    <Button fluid color="blue">
+                    <Button as="a" href="/dashboard" fluid color="blue">
                       <Icon name="pencil" /> Apply online
                     </Button>
                   }

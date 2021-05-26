@@ -48,6 +48,7 @@ function Institution(props) {
   const id = props.match.params.id;
   useEffect(async () => {
     const result = await clientService.findInstitutionById({ id });
+
     const facultyResult = await clientService.faculties();
     let facultyData = facultyResult.data.data.map((item) => {
       return {
@@ -186,7 +187,7 @@ function Institution(props) {
           fluid
           className="img-fluid shadow-2-strong"
           style={imageStyles(200)}
-          src={`/banners/${institution.banner}`}
+          src={`${institution ? institution.banner : ""}`}
         />
       ) : (
         <Placeholder fluid>
@@ -295,6 +296,8 @@ function Institution(props) {
                             </Table.Cell>
                             <Table.Cell singleLine>
                               <button
+                                as="a"
+                                href="/dashboard"
                                 type="button"
                                 class="btn btn-primary btn-rounded"
                               >

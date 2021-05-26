@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { TheContent, TheSidebar, TheFooter, TheHeader } from "./index";
 import clientService from "../services/clientService";
 import { asyncLocalStorage, TOKEN, USER } from "../utility/global";
+import { CCard, CCardBody, CCardFooter, CCardHeader } from "@coreui/react";
 import { years } from "../utility/constants";
 import {
   Menu,
@@ -117,79 +118,87 @@ const Sponsorship = (props) => {
           <br />
           <Grid columns="equal">
             <Grid.Column width={1}></Grid.Column>
-            <Grid.Column width={8}>
-              {isShowMessage ? (
-                <Message warning>
-                  <Message.Content>
-                    <p style={{ textAlign: "center" }}>{errorMessage}</p>
-                  </Message.Content>
-                </Message>
-              ) : (
-                ""
-              )}
-              <Form onSubmit={update}>
-                <Form.Field required>
-                  <label>Sponsor</label>
-                  <Dropdown
-                    selection
-                    onChange={onChangeDropdown}
-                    name="selectedSponsor"
-                    options={[
-                      {
-                        key: 1,
-                        text: "Self-sponsored",
-                        value: "Self-sponsored",
-                      },
-                      { key: 2, text: "Parents", value: "Parents" },
-                      {
-                        key: 1,
-                        text: "Other relatives",
-                        value: "Other relatives",
-                      },
-                      { key: 2, text: "Scholarship", value: "Scholarship" },
-                    ]}
-                    placeholder={selectedSponsor || "Choose an option"}
-                  />
-                </Form.Field>
+            <Grid.Column width={14}>
+              <CCard borderColor="primary">
+                <CCardHeader>
+                  <h4>Sponsorship Details</h4>
+                </CCardHeader>
+                <CCardBody>
+                  {isShowMessage ? (
+                    <Message warning>
+                      <Message.Content>
+                        <p style={{ textAlign: "center" }}>{errorMessage}</p>
+                      </Message.Content>
+                    </Message>
+                  ) : (
+                    ""
+                  )}
+                  <Form onSubmit={update}>
+                    <Form.Field required>
+                      <label>Sponsor</label>
+                      <Dropdown
+                        selection
+                        onChange={onChangeDropdown}
+                        name="selectedSponsor"
+                        options={[
+                          {
+                            key: 1,
+                            text: "Self-sponsored",
+                            value: "Self-sponsored",
+                          },
+                          { key: 2, text: "Parents", value: "Parents" },
+                          {
+                            key: 1,
+                            text: "Other relatives",
+                            value: "Other relatives",
+                          },
+                          { key: 2, text: "Scholarship", value: "Scholarship" },
+                        ]}
+                        placeholder={selectedSponsor || "Choose an option"}
+                      />
+                    </Form.Field>
 
-                <Form.Field required>
-                  <label>Sponsor's name</label>
-                  <input
-                    name="name"
-                    value={name}
-                    placeholder="Name"
-                    required
-                    onChange={onChange}
-                  />
-                </Form.Field>
-                <Form.Field required>
-                  <label>Occupation</label>
-                  <input
-                    name="occupation"
-                    value={occupation}
-                    placeholder="Occupation"
-                    required
-                    onChange={onChange}
-                  />
-                </Form.Field>
+                    <Form.Field required>
+                      <label>Sponsor's name</label>
+                      <input
+                        name="name"
+                        value={name}
+                        placeholder="Name"
+                        required
+                        onChange={onChange}
+                      />
+                    </Form.Field>
+                    <Form.Field required>
+                      <label>Occupation</label>
+                      <input
+                        name="occupation"
+                        value={occupation}
+                        placeholder="Occupation"
+                        required
+                        onChange={onChange}
+                      />
+                    </Form.Field>
 
-                <Form.Field required>
-                  <label>Budget</label>
-                  <input
-                    name="budget"
-                    value={budget}
-                    placeholder="Budget"
-                    required
-                    onChange={onChange}
-                  />
-                </Form.Field>
+                    <Form.Field required>
+                      <label>Budget</label>
+                      <input
+                        name="budget"
+                        value={budget}
+                        placeholder="Budget"
+                        required
+                        onChange={onChange}
+                      />
+                    </Form.Field>
 
-                <hr />
+                    <hr />
 
-                <Button loading={loading} color="blue" type="submit">
-                  Save
-                </Button>
-              </Form>
+                    <Button loading={loading} color="blue" type="submit">
+                      Save
+                    </Button>
+                  </Form>
+                </CCardBody>
+              </CCard>
+
               <br />
             </Grid.Column>
             <Grid.Column></Grid.Column>

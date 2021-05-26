@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { TheContent, TheSidebar, TheFooter, TheHeader } from "./index";
 import clientService from "../services/clientService";
 import { asyncLocalStorage, TOKEN, USER } from "../utility/global";
+import { CCard, CCardBody, CCardFooter, CCardHeader } from "@coreui/react";
 import { years } from "../utility/constants";
 import {
   Menu,
@@ -110,45 +111,55 @@ const Profile = (props) => {
           <br />
           <Grid columns="equal">
             <Grid.Column width={1}></Grid.Column>
-            <Grid.Column width={8}>
-              {isShowMessage ? (
-                <Message warning>
-                  <Message.Content>
-                    <p style={{ textAlign: "center" }}>{errorMessage}</p>
-                  </Message.Content>
-                </Message>
-              ) : (
-                ""
-              )}
-              <Form onSubmit={update}>
-                <Form.Field required>
-                  <label>Completion year</label>
-                  <Dropdown
-                    selection
-                    onChange={onChangeDropdown}
-                    name="selectedCompletionYear"
-                    options={completedYear}
-                    placeholder={selectedCompletionYear || "Choose an option"}
-                  />
-                </Form.Field>
+            <Grid.Column width={14}>
+              <CCard borderColor="primary">
+                <CCardHeader>
+                  <h4>High School Details</h4>
+                </CCardHeader>
+                <CCardBody>
+                  {isShowMessage ? (
+                    <Message warning>
+                      <Message.Content>
+                        <p style={{ textAlign: "center" }}>{errorMessage}</p>
+                      </Message.Content>
+                    </Message>
+                  ) : (
+                    ""
+                  )}
+                  <Form onSubmit={update}>
+                    <Form.Field required>
+                      <label>Completion year</label>
+                      <Dropdown
+                        selection
+                        onChange={onChangeDropdown}
+                        name="selectedCompletionYear"
+                        options={completedYear}
+                        placeholder={
+                          selectedCompletionYear || "Choose an option"
+                        }
+                      />
+                    </Form.Field>
 
-                <Form.Field required>
-                  <label>High school name</label>
-                  <input
-                    name="highSchoolName"
-                    value={highSchoolName}
-                    placeholder="High school name"
-                    required
-                    onChange={onChange}
-                  />
-                </Form.Field>
+                    <Form.Field required>
+                      <label>High school name</label>
+                      <input
+                        name="highSchoolName"
+                        value={highSchoolName}
+                        placeholder="High school name"
+                        required
+                        onChange={onChange}
+                      />
+                    </Form.Field>
 
-                <hr />
+                    <hr />
 
-                <Button loading={loading} color="blue" type="submit">
-                  Save
-                </Button>
-              </Form>
+                    <Button loading={loading} color="blue" type="submit">
+                      Save
+                    </Button>
+                  </Form>
+                </CCardBody>
+              </CCard>
+
               <br />
             </Grid.Column>
             <Grid.Column></Grid.Column>

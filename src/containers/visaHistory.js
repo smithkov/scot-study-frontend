@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { TheContent, TheSidebar, TheFooter, TheHeader } from "./index";
 import clientService from "../services/clientService";
 import { asyncLocalStorage, TOKEN, USER } from "../utility/global";
+import { CCard, CCardBody, CCardFooter, CCardHeader } from "@coreui/react";
 import { years } from "../utility/constants";
 import {
   Menu,
@@ -156,100 +157,108 @@ const VisaHistory = (props) => {
           <br />
           <Grid columns="equal">
             <Grid.Column width={1}></Grid.Column>
-            <Grid.Column width={8}>
-              {isShowMessage ? (
-                <Message warning>
-                  <Message.Content>
-                    <p style={{ textAlign: "center" }}>{errorMessage}</p>
-                  </Message.Content>
-                </Message>
-              ) : (
-                ""
-              )}
-              <Form>
-                <Form.Field required>
-                  <label>Have you applied for a UK Visa before ?</label>
-                  <Dropdown
-                    selection
-                    onChange={onChangeDropdown}
-                    name="selectedHasApplied"
-                    options={[
-                      {
-                        key: 1,
-                        text: "Yes",
-                        value: "Yes",
-                      },
-                      { key: 2, text: "No", value: "No" },
-                    ]}
-                    placeholder={selectedHasApplied || "Choose an option"}
-                  />
-                </Form.Field>
-                {isShowPurpose ? (
-                  <Form.Field required>
-                    <label>Purpose</label>
-                    <Form.TextArea
-                      value={purpose}
-                      name="purpose"
-                      onChange={onChange}
-                      placeholder="Tell us purpose of Visa application..."
-                    />
-                  </Form.Field>
-                ) : (
-                  ""
-                )}
+            <Grid.Column width={14}>
+              <CCard borderColor="primary">
+                <CCardHeader>
+                  <h4>Visa History</h4>
+                </CCardHeader>
+                <CCardBody>
+                  {isShowMessage ? (
+                    <Message warning>
+                      <Message.Content>
+                        <p style={{ textAlign: "center" }}>{errorMessage}</p>
+                      </Message.Content>
+                    </Message>
+                  ) : (
+                    ""
+                  )}
+                  <Form>
+                    <Form.Field required>
+                      <label>Have you applied for a UK Visa before ?</label>
+                      <Dropdown
+                        selection
+                        onChange={onChangeDropdown}
+                        name="selectedHasApplied"
+                        options={[
+                          {
+                            key: 1,
+                            text: "Yes",
+                            value: "Yes",
+                          },
+                          { key: 2, text: "No", value: "No" },
+                        ]}
+                        placeholder={selectedHasApplied || "Choose an option"}
+                      />
+                    </Form.Field>
+                    {isShowPurpose ? (
+                      <Form.Field required>
+                        <label>Purpose</label>
+                        <Form.TextArea
+                          value={purpose}
+                          name="purpose"
+                          onChange={onChange}
+                          placeholder="Tell us purpose of Visa application..."
+                        />
+                      </Form.Field>
+                    ) : (
+                      ""
+                    )}
 
-                <Form.Field required>
-                  <label>Have you been refused UK Visa before?</label>
-                  <Dropdown
-                    selection
-                    onChange={onChangeDropdown}
-                    name="selectedHasRefused"
-                    options={[
-                      {
-                        key: 1,
-                        text: "Yes",
-                        value: "Yes",
-                      },
-                      { key: 2, text: "No", value: "No" },
-                    ]}
-                    placeholder={selectedHasRefused || "Choose an option"}
-                  />
-                </Form.Field>
-                {isShowReason ? (
-                  <Form.Field required>
-                    <label>Reason of refusal</label>
-                    <Form.TextArea
-                      value={reason}
-                      name="reason"
-                      onChange={onChange}
-                      placeholder="Reason of refusal..."
-                    />
-                  </Form.Field>
-                ) : (
-                  ""
-                )}
+                    <Form.Field required>
+                      <label>Have you been refused UK Visa before?</label>
+                      <Dropdown
+                        selection
+                        onChange={onChangeDropdown}
+                        name="selectedHasRefused"
+                        options={[
+                          {
+                            key: 1,
+                            text: "Yes",
+                            value: "Yes",
+                          },
+                          { key: 2, text: "No", value: "No" },
+                        ]}
+                        placeholder={selectedHasRefused || "Choose an option"}
+                      />
+                    </Form.Field>
+                    {isShowReason ? (
+                      <Form.Field required>
+                        <label>Reason of refusal</label>
+                        <Form.TextArea
+                          value={reason}
+                          name="reason"
+                          onChange={onChange}
+                          placeholder="Reason of refusal..."
+                        />
+                      </Form.Field>
+                    ) : (
+                      ""
+                    )}
 
-                <Form.Field>
-                  <label>More info</label>
-                  <Form.TextArea
-                    value={moreInfo}
-                    onChange={onChange}
-                    name="moreInfo"
-                    placeholder="More info..."
-                  />
-                </Form.Field>
+                    <Form.Field>
+                      <label>More info</label>
+                      <Form.TextArea
+                        value={moreInfo}
+                        onChange={onChange}
+                        name="moreInfo"
+                        placeholder="More info..."
+                      />
+                    </Form.Field>
 
-                <hr />
+                    <hr />
 
-                <Button
-                  loading={loading}
-                  onClick={update}
-                  color="blue"
-                  type="submit"
-                >
-                  Save
-                </Button>
-              </Form>
+                    <Button
+                      loading={loading}
+                      onClick={update}
+                      color="blue"
+                      type="submit"
+                    >
+                      Save
+                    </Button>
+                  </Form>
+                </CCardBody>
+              </CCard>
+
               <br />
             </Grid.Column>
             <Grid.Column></Grid.Column>

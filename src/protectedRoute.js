@@ -17,6 +17,7 @@ export default function ProtectedRoute(ComponentToProtect) {
     componentDidMount = async () => {
       try {
         const result = await clientService.hasAuth();
+
         const error = result.data.error;
 
         if (!error) {
@@ -37,7 +38,7 @@ export default function ProtectedRoute(ComponentToProtect) {
       if (redirect) {
         return (
           <Redirect
-            to={{ pathname: "LOGIN_URL", state: { from: this.props.location } }}
+            to={{ pathname: "/login", state: { from: this.props.location } }}
           />
         );
       }

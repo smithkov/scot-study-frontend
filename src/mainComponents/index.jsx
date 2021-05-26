@@ -45,6 +45,7 @@ function Index() {
     setFaculties(result.data.data);
 
     setInstitutions(institutionResponse.data.data);
+
     setHasData(true);
   }, []);
 
@@ -234,7 +235,7 @@ function Index() {
                 <Grid.Column style={{ paddingBottom: 20 }}>
                   <div className="card bg-dark text-white bg-image hover-zoom">
                     <img
-                      src={`/banners/${item.banner}`}
+                      src={`${item.banner}`}
                       className="card-img  shadow-2-strong"
                       style={imageStyles(200)}
                     />

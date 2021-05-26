@@ -19,6 +19,7 @@ import {
   List,
   Message,
 } from "semantic-ui-react";
+import { CCard, CCardBody, CCardFooter, CCardHeader } from "@coreui/react";
 const English = (props) => {
   const [loading, setLoading] = useState(false);
   const [isShowMessage, setIsShowMessage] = useState(false);
@@ -101,48 +102,55 @@ const English = (props) => {
           <br />
           <Grid columns="equal">
             <Grid.Column width={1}></Grid.Column>
-            <Grid.Column width={8}>
-              {isShowMessage ? (
-                <Message warning>
-                  <Message.Content>
-                    <p style={{ textAlign: "center" }}>{errorMessage}</p>
-                  </Message.Content>
-                </Message>
-              ) : (
-                ""
-              )}
-              <Form onSubmit={update}>
-                <Form.Field required>
-                  <label>Test type</label>
-                  <Dropdown
-                    selection
-                    onChange={onChangeDropdown}
-                    name="selectedName"
-                    options={[
-                      { key: 1, text: "TOEFL", value: "TOEFL" },
-                      { key: 2, text: "IELTS", value: "IELTS" },
-                    ]}
-                    placeholder={selectedName || "Choose an option"}
-                  />
-                </Form.Field>
+            <Grid.Column width={14}>
+              <CCard accentColor="primary">
+                <CCardHeader>
+                  <h4>English Test</h4>
+                </CCardHeader>
+                <CCardBody>
+                  {isShowMessage ? (
+                    <Message warning>
+                      <Message.Content>
+                        <p style={{ textAlign: "center" }}>{errorMessage}</p>
+                      </Message.Content>
+                    </Message>
+                  ) : (
+                    ""
+                  )}
+                  <Form onSubmit={update}>
+                    <Form.Field required>
+                      <label>Test type</label>
+                      <Dropdown
+                        selection
+                        onChange={onChangeDropdown}
+                        name="selectedName"
+                        options={[
+                          { key: 1, text: "TOEFL", value: "TOEFL" },
+                          { key: 2, text: "IELTS", value: "IELTS" },
+                        ]}
+                        placeholder={selectedName || "Choose an option"}
+                      />
+                    </Form.Field>
 
-                <Form.Field required>
-                  <label>Score</label>
-                  <input
-                    name="score"
-                    value={score}
-                    placeholder="Score"
-                    required
-                    onChange={onChange}
-                  />
-                </Form.Field>
+                    <Form.Field required>
+                      <label>Score</label>
+                      <input
+                        name="score"
+                        value={score}
+                        placeholder="Score"
+                        required
+                        onChange={onChange}
+                      />
+                    </Form.Field>
 
-                <hr />
+                    <hr />
 
-                <Button loading={loading} color="blue" type="submit">
-                  Save
-                </Button>
-              </Form>
+                    <Button loading={loading} color="blue" type="submit">
+                      Save
+                    </Button>
+                  </Form>
+                </CCardBody>
+              </CCard>
             </Grid.Column>
             <Grid.Column></Grid.Column>
           </Grid>

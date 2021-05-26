@@ -20,7 +20,8 @@ function header(token) {
 class ClientService {
   hasAuth = async (data) => {
     const token = await asyncLocalStorage.getItem(TOKEN);
-    return http.get(`${SERVER_URL}/user/isLogin`, header(token));
+
+    return http.get(`${SERVER_URL}/isLogin`, header(token));
   };
   faculties = async () => {
     return http.post(`${SERVER_URL}/faculties`);

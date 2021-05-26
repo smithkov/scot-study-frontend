@@ -3,6 +3,7 @@ import { TheContent, TheSidebar, TheFooter, TheHeader } from "./index";
 import clientService from "../services/clientService";
 import { asyncLocalStorage, TOKEN, USER } from "../utility/global";
 import { Link, Redirect } from "react-router-dom";
+import { CCard, CCardBody, CCardFooter, CCardHeader } from "@coreui/react";
 
 import { years } from "../utility/constants";
 import {
@@ -237,229 +238,259 @@ const Application = (props) => {
 
           <Grid columns="equal">
             <Grid.Column width={1}></Grid.Column>
-            <Grid.Column width={hasApplied || submitFlag ? 14 : 8}>
-              {hasApplied || submitFlag ? (
-                <>
-                  <Segment textAlign="center" color="blue">
-                    <h2>Your application has been submitted</h2>
-                  </Segment>
-                  <hr />
-                  {hasApplied ? (
-                    <Button onClick={newApplication} color="blue">
-                      Start a new application
-                    </Button>
+            <Grid.Column width={14}>
+              <CCard borderColor="primary">
+                <CCardHeader>
+                  <h4>Application</h4>
+                </CCardHeader>
+                <CCardBody>
+                  {hasApplied || submitFlag ? (
+                    <>
+                      <Segment textAlign="center" color="blue">
+                        <h2>Your application has been submitted</h2>
+                      </Segment>
+                      <hr />
+                      {hasApplied ? (
+                        <Button onClick={newApplication} color="blue">
+                          Start a new application
+                        </Button>
+                      ) : (
+                        <Button as="a" href="/dashboard" color="blue">
+                          Return to dashboard
+                        </Button>
+                      )}
+                    </>
                   ) : (
-                    <Button as="a" href="/dashboard" color="blue">
-                      Return to dashboard
-                    </Button>
-                  )}
-                </>
-              ) : (
-                <>
-                  {" "}
-                  {isShowMessage ? (
-                    <Message warning>
-                      <Message.Content>
-                        <p style={{ textAlign: "center" }}>{errorMessage}</p>
-                      </Message.Content>
-                    </Message>
-                  ) : (
-                    ""
-                  )}
-                  <Form onSubmit={update}>
-                    <Modal
-                      style={{ height: "auto" }}
-                      size="small"
-                      open={isOpenModal}
-                    >
-                      <Modal.Header>Delete Your Account</Modal.Header>
-                      <Modal.Content scrolling>
-                        <Input
-                          name="search"
-                          onChange={searchCourse}
-                          fluid
-                          placeholder="Search course"
-                        />
-                        {institutions.length > 0 ? (
-                          <Table unstackable color="blue">
+                    <>
+                      {" "}
+                      {isShowMessage ? (
+                        <Message warning>
+                          <Message.Content>
+                            <p style={{ textAlign: "center" }}>
+                              {errorMessage}
+                            </p>
+                          </Message.Content>
+                        </Message>
+                      ) : (
+                        ""
+                      )}
+                      <Form onSubmit={update}>
+                        <Modal
+                          style={{ height: "auto" }}
+                          size="small"
+                          open={isOpenModal}
+                        >
+                          <Modal.Header>Delete Your Account</Modal.Header>
+                          <Modal.Content scrolling>
+                            <Input
+                              name="search"
+                              onChange={searchCourse}
+                              fluid
+                              placeholder="Search course"
+                            />
+                            {institutions.length > 0 ? (
+                              <Table unstackable color="blue">
+                                <Table.Header>
+                                  <Table.Row>
+                                    <Table.HeaderCell>Name</Table.HeaderCell>
+                                    <Table.HeaderCell>Faculty</Table.HeaderCell>
+                                    <Table.HeaderCell>Degree</Table.HeaderCell>
+                                    <Table.HeaderCell></Table.HeaderCell>
+                                  </Table.Row>
+                                </Table.Header>
+
+                                <Table.Body>
+                                  {institutions.map((item) => {
+                                    return (
+                                      <Table.Row>
+                                        <Table.Cell>{item.name}</Table.Cell>
+                                        <Table.Cell>
+                                          {item.Faculty.name}
+                                        </Table.Cell>
+                                        <Table.Cell>
+                                          {item.DegreeType.name}
+                                        </Table.Cell>
+                                        <Table.Cell>
+                                          <Button
+                                            onClick={() => selectCourse(item)}
+                                            size="mini"
+                                            color="blue"
+                                          >
+                                            Select
+                                          </Button>
+                                        </Table.Cell>
+                                      </Table.Row>
+                                    );
+                                  })}
+                                </Table.Body>
+                              </Table>
+                            ) : (
+                              <Message floating>No result found</Message>
+                            )}
+                          </Modal.Content>
+                          <Modal.Actions>
+                            <Button
+                              onClick={() => setIsOpenModal(false)}
+                              negative
+                            >
+                              Close
+                            </Button>
+                          </Modal.Actions>
+                          <br />
+                          <br />
+                        </Modal>
+                        <Form.Field required>
+                          <label>Degree of choice</label>
+                          <Dropdown
+                            required
+                            fluid
+                            selection
+                            search
+                            name="selectedDegreeType"
+                            label="Degree Type"
+                            placeholder={"Degree Type"}
+                            options={degreeTypes}
+                            onChange={onChangeDropdown}
+                          />
+                        </Form.Field>
+                        <Form.Field required>
+                          <label> Preferred institution first choice</label>
+                          <Dropdown
+                            disabled={selectedDegreeType ? false : true}
+                            required
+                            fluid
+                            selection
+                            search
+                            name="selectedSchoolOne"
+                            label="School"
+                            placeholder={"Institution"}
+                            options={schoolOne}
+                            onChange={onChangeDropdown}
+                          />
+                        </Form.Field>
+                        {selectedSchoolOne ? (
+                          <>
+                            <Button
+                              type="button"
+                              onClick={loadSchoolOne}
+                              positive
+                            >
+                              Select first course of choice
+                            </Button>{" "}
+                            <br />
+                            <br />
+                          </>
+                        ) : (
+                          ""
+                        )}
+                        {courseOne ? (
+                          <Table unstackable compact color="blue">
                             <Table.Header>
                               <Table.Row>
-                                <Table.HeaderCell>Name</Table.HeaderCell>
-                                <Table.HeaderCell>Faculty</Table.HeaderCell>
-                                <Table.HeaderCell>Degree</Table.HeaderCell>
+                                <Table.HeaderCell>
+                                  First course of choice{" "}
+                                </Table.HeaderCell>
                                 <Table.HeaderCell></Table.HeaderCell>
                               </Table.Row>
                             </Table.Header>
 
                             <Table.Body>
-                              {institutions.map((item) => {
-                                return (
-                                  <Table.Row>
-                                    <Table.Cell>{item.name}</Table.Cell>
-                                    <Table.Cell>{item.Faculty.name}</Table.Cell>
-                                    <Table.Cell>
-                                      {item.DegreeType.name}
-                                    </Table.Cell>
-                                    <Table.Cell>
-                                      <Button
-                                        onClick={() => selectCourse(item)}
-                                        size="mini"
-                                        color="blue"
-                                      >
-                                        Select
-                                      </Button>
-                                    </Table.Cell>
-                                  </Table.Row>
-                                );
-                              })}
+                              <Table.Row>
+                                <Table.Cell>{courseOne.name}</Table.Cell>
+                                <Table.Cell>
+                                  <Link onClick={() => removeCourse(1)}>
+                                    {" "}
+                                    <Icon
+                                      color="red"
+                                      size="large"
+                                      name="cancel"
+                                    />
+                                  </Link>
+                                </Table.Cell>
+                              </Table.Row>
                             </Table.Body>
                           </Table>
                         ) : (
-                          <Message floating>No result found</Message>
+                          ""
                         )}
-                      </Modal.Content>
-                      <Modal.Actions>
-                        <Button onClick={() => setIsOpenModal(false)} negative>
-                          Close
+
+                        <Form.Field required>
+                          <label>
+                            {" "}
+                            Preferred institution second choice (if any)
+                          </label>
+                          <Dropdown
+                            disabled={
+                              selectedDegreeType && courseOne ? false : true
+                            }
+                            required
+                            fluid
+                            selection
+                            search
+                            name="selectedSchoolTwo"
+                            label="School"
+                            placeholder={"Institution"}
+                            options={schoolTwo}
+                            onChange={onChangeDropdown}
+                          />
+                        </Form.Field>
+                        {selectedSchoolTwo ? (
+                          <>
+                            <Button
+                              type="button"
+                              onClick={loadSchoolTwo}
+                              positive
+                            >
+                              Select second course of choice
+                            </Button>{" "}
+                            <br />
+                            <br />
+                          </>
+                        ) : (
+                          ""
+                        )}
+                        {courseTwo ? (
+                          <Table unstackable compact color="blue">
+                            <Table.Header>
+                              <Table.Row>
+                                <Table.HeaderCell>
+                                  Second course of choice{" "}
+                                </Table.HeaderCell>
+                                <Table.HeaderCell></Table.HeaderCell>
+                              </Table.Row>
+                            </Table.Header>
+
+                            <Table.Body>
+                              <Table.Row>
+                                <Table.Cell>{courseTwo.name}</Table.Cell>
+                                <Table.Cell>
+                                  <Link onClick={() => removeCourse(2)}>
+                                    {" "}
+                                    <Icon
+                                      color="red"
+                                      size="large"
+                                      name="cancel"
+                                    />
+                                  </Link>
+                                </Table.Cell>
+                              </Table.Row>
+                            </Table.Body>
+                          </Table>
+                        ) : (
+                          ""
+                        )}
+
+                        <hr />
+
+                        <Button loading={loading} color="blue" type="submit">
+                          Submit
                         </Button>
-                      </Modal.Actions>
+                      </Form>
                       <br />
-                      <br />
-                    </Modal>
-                    <Form.Field required>
-                      <label>Degree of choice</label>
-                      <Dropdown
-                        required
-                        fluid
-                        selection
-                        search
-                        name="selectedDegreeType"
-                        label="Degree Type"
-                        placeholder={"Degree Type"}
-                        options={degreeTypes}
-                        onChange={onChangeDropdown}
-                      />
-                    </Form.Field>
-                    <Form.Field required>
-                      <label> Preferred institution first choice</label>
-                      <Dropdown
-                        disabled={selectedDegreeType ? false : true}
-                        required
-                        fluid
-                        selection
-                        search
-                        name="selectedSchoolOne"
-                        label="School"
-                        placeholder={"Institution"}
-                        options={schoolOne}
-                        onChange={onChangeDropdown}
-                      />
-                    </Form.Field>
-                    {selectedSchoolOne ? (
-                      <>
-                        <Button type="button" onClick={loadSchoolOne} positive>
-                          Select first course of choice
-                        </Button>{" "}
-                        <br />
-                        <br />
-                      </>
-                    ) : (
-                      ""
-                    )}
-                    {courseOne ? (
-                      <Table unstackable compact color="blue">
-                        <Table.Header>
-                          <Table.Row>
-                            <Table.HeaderCell>
-                              First course of choice{" "}
-                            </Table.HeaderCell>
-                            <Table.HeaderCell></Table.HeaderCell>
-                          </Table.Row>
-                        </Table.Header>
-
-                        <Table.Body>
-                          <Table.Row>
-                            <Table.Cell>{courseOne.name}</Table.Cell>
-                            <Table.Cell>
-                              <Link onClick={() => removeCourse(1)}>
-                                {" "}
-                                <Icon color="red" size="large" name="cancel" />
-                              </Link>
-                            </Table.Cell>
-                          </Table.Row>
-                        </Table.Body>
-                      </Table>
-                    ) : (
-                      ""
-                    )}
-
-                    <Form.Field required>
-                      <label>
-                        {" "}
-                        Preferred institution second choice (if any)
-                      </label>
-                      <Dropdown
-                        disabled={
-                          selectedDegreeType && courseOne ? false : true
-                        }
-                        required
-                        fluid
-                        selection
-                        search
-                        name="selectedSchoolTwo"
-                        label="School"
-                        placeholder={"Institution"}
-                        options={schoolTwo}
-                        onChange={onChangeDropdown}
-                      />
-                    </Form.Field>
-                    {selectedSchoolTwo ? (
-                      <>
-                        <Button type="button" onClick={loadSchoolTwo} positive>
-                          Select second course of choice
-                        </Button>{" "}
-                        <br />
-                        <br />
-                      </>
-                    ) : (
-                      ""
-                    )}
-                    {courseTwo ? (
-                      <Table unstackable compact color="blue">
-                        <Table.Header>
-                          <Table.Row>
-                            <Table.HeaderCell>
-                              Second course of choice{" "}
-                            </Table.HeaderCell>
-                            <Table.HeaderCell></Table.HeaderCell>
-                          </Table.Row>
-                        </Table.Header>
-
-                        <Table.Body>
-                          <Table.Row>
-                            <Table.Cell>{courseTwo.name}</Table.Cell>
-                            <Table.Cell>
-                              <Link onClick={() => removeCourse(2)}>
-                                {" "}
-                                <Icon color="red" size="large" name="cancel" />
-                              </Link>
-                            </Table.Cell>
-                          </Table.Row>
-                        </Table.Body>
-                      </Table>
-                    ) : (
-                      ""
-                    )}
-
-                    <hr />
-
-                    <Button loading={loading} color="blue" type="submit">
-                      Submit
-                    </Button>
-                  </Form>
-                  <br />
-                </>
-              )}
+                    </>
+                  )}
+                </CCardBody>
+              </CCard>
             </Grid.Column>
             <Grid.Column></Grid.Column>
           </Grid>
